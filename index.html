@@ -1,375 +1,792 @@
-# Animated Restaurant Website (HTML, CSS, JavaScript)
-
-Save this as `index.html` and open it in your browser.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-      scroll-behavior: smooth;
-    }
+<title>Paparttest 1 Restaurant</title>
 
-    body {
-      background: #0f172a;
-      color: white;
-      overflow-x: hidden;
-    }
+<style>
 
-    /* NAVBAR */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  scroll-behavior:smooth;
+}
 
-    nav h1 {
-      color: #38bdf8;
-      font-size: 32px;
-    }
+body{
+  background:#0f172a;
+  color:white;
+  overflow-x:hidden;
+}
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 30px;
-    }
+/* PARTICLES BACKGROUND */
+.particles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  background-image:
+  radial-gradient(#38bdf8 2px,transparent 2px);
+  background-size:40px 40px;
+  opacity:0.1;
+  animation:moveBg 20s linear infinite;
+  z-index:-1;
+}
 
-    nav ul li a {
-      text-decoration: none;
-      color: white;
-      font-size: 18px;
-      transition: 0.3s;
-      position: relative;
-    }
+@keyframes moveBg{
+  from{
+    transform:translateY(0);
+  }
+  to{
+    transform:translateY(-200px);
+  }
+}
 
-    nav ul li a::after {
-      content: '';
-      width: 0;
-      height: 3px;
-      background: #38bdf8;
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      transition: 0.3s;
-    }
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
 
-    nav ul li a:hover::after {
-      width: 100%;
-    }
+nav h1{
+  color:#38bdf8;
+  font-size:32px;
+}
 
-    nav ul li a:hover {
-      color: #38bdf8;
-    }
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:30px;
+}
 
-    /* SECTION */
-    section {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 100px 20px;
-      text-align: center;
-    }
+nav ul li a{
+  text-decoration:none;
+  color:white;
+  font-size:18px;
+  transition:0.3s;
+  position:relative;
+}
 
-    /* HOME */
-    #home {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-      url('https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720');
-      background-size: cover;
-      background-position: center;
-      animation: zoomBg 10s infinite alternate;
-    }
+nav ul li a::after{
+  content:'';
+  width:0;
+  height:3px;
+  background:#38bdf8;
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
+}
 
-    @keyframes zoomBg {
-      from {
-        background-size: 100%;
-      }
-      to {
-        background-size: 110%;
-      }
-    }
+nav ul li a:hover::after{
+  width:100%;
+}
 
-    .hero-title {
-      font-size: 70px;
-      color: #38bdf8;
-      animation: fadeDown 1.5s ease;
-    }
+nav ul li a:hover{
+  color:#38bdf8;
+}
 
-    .hero-text {
-      margin-top: 20px;
-      font-size: 24px;
-      max-width: 700px;
-      animation: fadeUp 2s ease;
-    }
+/* SECTION */
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:100px 20px;
+  text-align:center;
+}
 
-    .btn {
-      margin-top: 30px;
-      padding: 15px 35px;
-      border: none;
-      background: #38bdf8;
-      color: white;
-      font-size: 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.4s;
-      box-shadow: 0 0 20px #38bdf8;
-    }
+/* HOME */
+#home{
+  background:
+  linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+  url('https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720');
+  background-size:cover;
+  background-position:center;
+  animation:zoomBg 10s infinite alternate;
+}
 
-    .btn:hover {
-      transform: scale(1.1);
-      background: white;
-      color: #0f172a;
-    }
+@keyframes zoomBg{
+  from{
+    background-size:100%;
+  }
+  to{
+    background-size:110%;
+  }
+}
 
-    /* MENU */
-    #menu {
-      background: #111827;
-    }
+.hero-title{
+  font-size:70px;
+  color:#38bdf8;
+  animation:fadeDown 1.5s ease;
+}
 
-    .section-title {
-      font-size: 50px;
-      color: #38bdf8;
-      margin-bottom: 50px;
-      animation: fadeDown 1s ease;
-    }
+.hero-text{
+  margin-top:20px;
+  font-size:24px;
+  max-width:700px;
+  animation:fadeUp 2s ease;
+}
 
-    .menu-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      width: 90%;
-      max-width: 1200px;
-    }
+.btn{
+  margin-top:30px;
+  padding:15px 35px;
+  border:none;
+  background:#38bdf8;
+  color:white;
+  font-size:18px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:0.4s;
+  box-shadow:0 0 20px #38bdf8;
+}
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 20px;
-      transition: 0.5s;
-      animation: floatCard 4s infinite ease-in-out;
-    }
+.btn:hover{
+  transform:scale(1.1);
+  background:white;
+  color:#0f172a;
+}
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 0 25px #38bdf8;
-    }
+/* MENU */
+#menu{
+  background:#111827;
+}
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 15px;
-    }
+.section-title{
+  font-size:50px;
+  color:#38bdf8;
+  margin-bottom:50px;
+}
 
-    .card h3 {
-      margin-top: 15px;
-      font-size: 28px;
-      color: #38bdf8;
-    }
+.menu-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  width:90%;
+  max-width:1300px;
+}
 
-    .card p {
-      margin-top: 10px;
-      color: #d1d5db;
-    }
+.card{
+  background:#1e293b;
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.5s;
+  cursor:pointer;
+  position:relative;
+  opacity:0;
+  transform:translateY(100px);
+}
 
-    /* CONTACT */
-    #contact {
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-    }
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .contact-box {
-      background: rgba(255,255,255,0.1);
-      padding: 40px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      animation: fadeUp 2s ease;
-    }
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 0 30px #38bdf8;
+}
 
-    .contact-box p {
-      margin: 15px 0;
-      font-size: 22px;
-    }
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
 
-    /* ANIMATIONS */
-    @keyframes fadeDown {
-      from {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.food-info{
+  padding:20px;
+  text-align:left;
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.food-info h3{
+  color:#38bdf8;
+  font-size:28px;
+}
 
-    @keyframes floatCard {
-      0% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-      100% {
-        transform: translateY(0px);
-      }
-    }
+.food-info p{
+  margin-top:10px;
+  color:#d1d5db;
+  line-height:1.5;
+}
 
-    /* MOBILE */
-    @media(max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-      }
+.details{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+  color:#9ca3af;
+}
 
-      .hero-title {
-        font-size: 45px;
-      }
+.bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:20px;
+}
 
-      .hero-text {
-        font-size: 18px;
-      }
-    }
-  </style>
+.price{
+  background:#22c55e;
+  color:white;
+  padding:10px 18px;
+  border-radius:20px;
+  font-weight:bold;
+  box-shadow:0 0 15px #22c55e;
+  animation:glowGreen 1.5s infinite alternate;
+}
+
+.order-text{
+  color:#38bdf8;
+  font-weight:bold;
+  font-size:16px;
+}
+
+@keyframes glowGreen{
+  from{
+    box-shadow:0 0 5px #22c55e;
+  }
+  to{
+    box-shadow:0 0 20px #22c55e;
+  }
+}
+
+/* CONTACT */
+#contact{
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+}
+
+.contact-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  width:90%;
+  max-width:1200px;
+}
+
+.contact-card{
+  background:rgba(255,255,255,0.08);
+  padding:35px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  transition:0.5s;
+}
+
+.contact-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 25px #38bdf8;
+}
+
+.contact-card h3{
+  color:#38bdf8;
+  margin-bottom:15px;
+  font-size:24px;
+}
+
+.contact-card p{
+  color:#d1d5db;
+  line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  padding:25px;
+  text-align:center;
+  color:#94a3b8;
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+  from{
+    opacity:0;
+    transform:translateY(-50px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(50px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  nav{
+    flex-direction:column;
+    gap:15px;
+    padding:20px;
+  }
+
+  .hero-title{
+    font-size:45px;
+  }
+
+  .hero-text{
+    font-size:18px;
+  }
+
+}
+
+</style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <h1>Paparttest 1</h1>
+<div class="particles"></div>
 
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- NAVBAR -->
+<nav>
 
-  <!-- HOME SECTION -->
-  <section id="home">
-    <h1 class="hero-title">Welcome to Paparttest 1 Restaurant</h1>
+<h1>Paparttest 1</h1>
 
-    <p class="hero-text">
-      Enjoy delicious food Click Menu to explore our tasty meals.
-    </p>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 
-    <a href="#menu">
-      <button class="btn">View Menu</button>
-    </a>
-  </section>
+</nav>
 
-  <!-- MENU SECTION -->
-  <section id="menu">
-    <h2 class="section-title">Our Menu</h2>
+<!-- HOME -->
+<section id="home">
 
-    <div class="menu-container">
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pizza</h3><p>Cheesy pizza with fresh toppings.</p></div>
+<h1 class="hero-title">
+Welcome to Paparttest 1 Restaurant
+</h1>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Burger</h3><p>Juicy grilled burger with fries.</p></div>
+<p class="hero-text">
+Enjoy delicious foods with modern style and amazing taste.
+</p>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Salad</h3><p>Fresh healthy vegetable salad.</p></div>
+<a href="#menu">
+<button class="btn">Explore Menu</button>
+</a>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Steak</h3><p>Premium grilled steak meal.</p></div>
+</section>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pasta</h3><p>Creamy pasta with cheese.</p></div>
+<!-- MENU -->
+<section id="menu">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fries</h3><p>Crispy golden french fries.</p></div>
+<h2 class="section-title">
+Our Menu
+</h2>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fried Chicken</h3><p>Crispy chicken with sauce.</p></div>
+<div class="menu-container">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Sushi</h3><p>Fresh sushi rolls and seafood.</p></div>
+<!-- 1 -->
+<div class="card">
+<img src="http">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Hotdog</h3><p>Cheesy loaded hotdog.</p></div>
+<div class="food-info">
+<h3>Test 1</h3>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Dessert</h3><p>Sweet cakes and desserts.</p></div>
+<p>test 1</p>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pancakes</h3><p>Soft pancakes with syrup.</p></div>
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Ice Cream</h3><p>Cold creamy ice cream flavors.</p></div>
+<div class="bottom">
+<span class="price">₱199</span>
+<span class="order-text">Available Now</span>
+</div>
+</div>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Sandwich</h3><p>Fresh sandwich with vegetables.</p></div>
+<!-- 2 -->
+<div class="card">
+<img src="http">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Noodles</h3><p>Hot noodles with tasty broth.</p></div>
+<div class="food-info">
+<h3>Test 1</h3>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Milk Tea</h3><p>Refreshing cold milk tea drink.</p></div>
+<p>test 1</p>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Rice Meal</h3><p>Classic rice meal with meat.</p></div>
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Tacos</h3><p>Crunchy tacos with fillings.</p></div>
+<div class="bottom">
+<span class="price">₱199</span>
+<span class="order-text">Available Now</span>
+</div>
+</div>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Waffles</h3><p>Sweet waffles with toppings.</p></div>
+<!-- 3 -->
+<div class="card">
+<img src="http">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Donuts</h3><p>Soft donuts with chocolate.</p></div>
+<div class="food-info">
+<h3>Test 1</h3>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>BBQ</h3><p>Smoky barbecue grilled meat.</p></div>
+<p>test 1</p>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Seafood</h3><p>Fresh seafood platter meal.</p></div>
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Ramen</h3><p>Japanese ramen noodle soup.</p></div>
+<div class="bottom">
+<span class="price">₱199</span>
+<span class="order-text">Available Now</span>
+</div>
+</div>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pepperoni Pizza</h3><p>Hot pepperoni pizza slices.</p></div>
+<!-- 4 -->
+<div class="card">
+<img src="http">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Coffee</h3><p>Hot brewed premium coffee.</p></div>
+<div class="food-info">
+<h3>Test 1</h3>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fruit Juice</h3><p>Fresh fruit juice drinks.</p></div>
+<p>test 1</p>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Soup</h3><p>Warm delicious homemade soup.</p></div>
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Chicken Wings</h3><p>Spicy crispy chicken wings.</p></div>
+<div class="bottom">
+<span class="price">₱199</span>
+<span class="order-text">Available Now</span>
+</div>
+</div>
+</div>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Cheesecake</h3><p>Soft creamy cheesecake dessert.</p></div>
+<!-- 5 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=1200&auto=format&fit=crop">
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Smoothie</h3><p>Cold fruit smoothie blend.</p></div>
+<div class="food-info">
+<h3>Pasta Carbonara</h3>
 
-      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Nachos</h3><p>Crunchy nachos with cheese.</p></div>
+<p>Creamy carbonara pasta with bacon bits.</p>
 
-    </div>
-  </section>
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
 
-  <!-- CONTACT SECTION -->
-  <section id="contact">
-    <h2 class="section-title">Contact Us</h2>
+<div class="bottom">
+<span class="price">₱189</span>
+<span class="order-text">Creamy Taste</span>
+</div>
+</div>
+</div>
 
-    <div class="contact-box">
-      <p>📍 San Carlos City, Negros Occidental</p>
-      <p>📞 +63 ???</p>
-      <p>✉️ Paparttest1@email.com</p>
-    </div>
-  </section>
+<!-- 6 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>French Fries</h3>
+
+<p>Golden crispy fries with cheese powder.</p>
+
+<div class="details">
+<span>⭐ 4.6</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱79</span>
+<span class="order-text">Crunchy Snack</span>
+</div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="card">
+<img src="http">
+
+<div class="food-info">
+<h3>Test 1</h3>
+
+<p>test 1</p>
+
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱199</span>
+<span class="order-text">Available Now</span>
+</div>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Pepperoni Pizza</h3>
+
+<p>Spicy pepperoni pizza with melted cheese.</p>
+
+<div class="details">
+<span>⭐ 5.0</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱249</span>
+<span class="order-text">Top Rated</span>
+</div>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>BBQ Meal</h3>
+
+<p>Smoky barbecue meat with rice and sauce.</p>
+
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱169</span>
+<span class="order-text">Smoky Flavor</span>
+</div>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Ice Cream</h3>
+
+<p>Cold creamy dessert with chocolate syrup.</p>
+
+<div class="details">
+<span>⭐ 4.7</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱89</span>
+<span class="order-text">Sweet Dessert</span>
+</div>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Chicken Wings</h3>
+
+<p>Spicy chicken wings with flavorful sauce.</p>
+
+<div class="details">
+<span>⭐ 4.9</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱159</span>
+<span class="order-text">Spicy Special</span>
+</div>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Healthy Salad</h3>
+
+<p>Fresh vegetable salad with dressing.</p>
+
+<div class="details">
+<span>⭐ 4.6</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱129</span>
+<span class="order-text">Healthy Choice</span>
+</div>
+</div>
+</div>
+
+<!-- 13 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Cheesecake</h3>
+
+<p>Soft creamy cheesecake with sweet topping.</p>
+
+<div class="details">
+<span>⭐ 4.8</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱110</span>
+<span class="order-text">Sweet Favorite</span>
+</div>
+</div>
+</div>
+
+<!-- 14 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1550547660-efe0b84c6f6f?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Tacos</h3>
+
+<p>Crunchy tacos filled with beef and veggies.</p>
+
+<div class="details">
+<span>⭐ 4.7</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱139</span>
+<span class="order-text">Mexican Style</span>
+</div>
+</div>
+</div>
+
+
+<!-- 15 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Seafood Platter</h3>
+
+<p>Fresh seafood with shrimp, crab, and sauce.</p>
+
+<div class="details">
+<span>⭐ 5.0</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱299</span>
+<span class="order-text">Premium Meal</span>
+</div>
+</div>
+</div>
+
+<!-- 16 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop">
+
+<div class="food-info">
+<h3>Seafood Platter</h3>
+
+<p>Fresh seafood with shrimp, crab, and sauce.</p>
+
+<div class="details">
+<span>⭐ 5.0</span>
+</div>
+
+<div class="bottom">
+<span class="price">₱299</span>
+<span class="order-text">Premium Meal</span>
+</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+<h2 class="section-title">
+Contact Us
+</h2>
+
+<div class="contact-container">
+
+<div class="contact-card">
+<h3>📍 Address</h3>
+<p>San Carlos City, Negros Occidental</p>
+</div>
+
+<div class="contact-card">
+<h3>📞 Phone</h3>
+<p>+63 912 345 6789</p>
+</div>
+
+<div class="contact-card">
+<h3>✉ Email</h3>
+<p>Paparttest1@email.com</p>
+</div>
+
+<div class="contact-card">
+<h3>🕒 Opening Hours</h3>
+<p>Monday - Sunday : 9AM - 11PM</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+<p>
+© 2026 Paparttest 1 Restaurant | All Rights Reserved
+</p>
+</footer>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- JAVASCRIPT -->
+<script>
+
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', () => {
+
+cards.forEach(card => {
+
+const cardTop = card.getBoundingClientRect().top;
+
+if(cardTop < window.innerHeight - 100){
+card.classList.add('show');
+}
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
-```
-
-paparttest1
 
 
 
