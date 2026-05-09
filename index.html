@@ -1,0 +1,382 @@
+# Animated Restaurant Website (HTML, CSS, JavaScript)
+
+Save this as `index.html` and open it in your browser.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test1</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0f172a;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    nav h1 {
+      color: #38bdf8;
+      font-size: 32px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      width: 0;
+      height: 3px;
+      background: #38bdf8;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+
+    /* SECTION */
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    /* HOME */
+    #home {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+      url('https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720');
+      background-size: cover;
+      background-position: center;
+      animation: zoomBg 10s infinite alternate;
+    }
+
+    @keyframes zoomBg {
+      from {
+        background-size: 100%;
+      }
+      to {
+        background-size: 110%;
+      }
+    }
+
+    .hero-title {
+      font-size: 70px;
+      color: #38bdf8;
+      animation: fadeDown 1.5s ease;
+    }
+
+    .hero-text {
+      margin-top: 20px;
+      font-size: 24px;
+      max-width: 700px;
+      animation: fadeUp 2s ease;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 15px 35px;
+      border: none;
+      background: #38bdf8;
+      color: white;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 20px #38bdf8;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background: white;
+      color: #0f172a;
+    }
+
+    /* MENU */
+    #menu {
+      background: #111827;
+    }
+
+    .section-title {
+      font-size: 50px;
+      color: #38bdf8;
+      margin-bottom: 50px;
+      animation: fadeDown 1s ease;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 20px;
+      transition: 0.5s;
+      animation: floatCard 4s infinite ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 25px #38bdf8;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .card h3 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #38bdf8;
+    }
+
+    .card p {
+      margin-top: 10px;
+      color: #d1d5db;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    }
+
+    .contact-box {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      animation: fadeUp 2s ease;
+    }
+
+    .contact-box p {
+      margin: 15px 0;
+      font-size: 22px;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatCard {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* MOBILE */
+    @media(max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+
+      .hero-title {
+        font-size: 45px;
+      }
+
+      .hero-text {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h1>Paparttest 1</h1>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME SECTION -->
+  <section id="home">
+    <h1 class="hero-title">Welcome to Paparttest 1 Restaurant</h1>
+
+    <p class="hero-text">
+      Enjoy delicious food Click Menu to explore our tasty meals.
+    </p>
+
+    <a href="#menu">
+      <button class="btn">View Menu</button>
+    </a>
+  </section>
+
+  <!-- MENU SECTION -->
+  <section id="menu">
+    <h2 class="section-title">Our Menu</h2>
+
+    <div class="menu-container">
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pizza</h3><p>Cheesy pizza with fresh toppings.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Burger</h3><p>Juicy grilled burger with fries.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Salad</h3><p>Fresh healthy vegetable salad.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Steak</h3><p>Premium grilled steak meal.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pasta</h3><p>Creamy pasta with cheese.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fries</h3><p>Crispy golden french fries.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fried Chicken</h3><p>Crispy chicken with sauce.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Sushi</h3><p>Fresh sushi rolls and seafood.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Hotdog</h3><p>Cheesy loaded hotdog.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Dessert</h3><p>Sweet cakes and desserts.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pancakes</h3><p>Soft pancakes with syrup.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Ice Cream</h3><p>Cold creamy ice cream flavors.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Sandwich</h3><p>Fresh sandwich with vegetables.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Noodles</h3><p>Hot noodles with tasty broth.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Milk Tea</h3><p>Refreshing cold milk tea drink.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Rice Meal</h3><p>Classic rice meal with meat.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Tacos</h3><p>Crunchy tacos with fillings.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Waffles</h3><p>Sweet waffles with toppings.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Donuts</h3><p>Soft donuts with chocolate.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>BBQ</h3><p>Smoky barbecue grilled meat.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Seafood</h3><p>Fresh seafood platter meal.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Ramen</h3><p>Japanese ramen noodle soup.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Pepperoni Pizza</h3><p>Hot pepperoni pizza slices.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Coffee</h3><p>Hot brewed premium coffee.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Fruit Juice</h3><p>Fresh fruit juice drinks.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Soup</h3><p>Warm delicious homemade soup.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Chicken Wings</h3><p>Spicy crispy chicken wings.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Cheesecake</h3><p>Soft creamy cheesecake dessert.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Smoothie</h3><p>Cold fruit smoothie blend.</p></div>
+
+      <div class="card"><img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/WIN_20260509_18_41_04_Pro.jpg?w=1280&h=720"><h3>Nachos</h3><p>Crunchy nachos with cheese.</p></div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+
+    <div class="contact-box">
+      <p>📍 San Carlos City, Negros Occidental</p>
+      <p>📞 +63 ???</p>
+      <p>✉️ Paparttest1@email.com</p>
+    </div>
+  </section>
+
+</body>
+</html>
+```
+
+Features:
+
+* Smooth scrolling navigation
+* Animated menu cards
+* Hover effects
+* Cool blue modern design
+* Responsive mobile layout
+* Home, Menu, and Contact sections
+
+
+
