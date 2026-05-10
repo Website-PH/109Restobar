@@ -1,791 +1,671 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>10.9 Restobar & Catering Services</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-scroll-behavior:smooth;
-}
-
-body{
-background:#0a0a0a;
-color:white;
-overflow-x:hidden;
-}
-
-/* BACKGROUND */
-
-body::before{
-content:'';
-position:fixed;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at top left,rgba(255,255,255,0.06),transparent 25%),
-radial-gradient(circle at bottom right,rgba(255,255,255,0.04),transparent 25%);
-z-index:-2;
-}
-
-/* GRID */
-
-body::after{
-content:'';
-position:fixed;
-width:100%;
-height:100%;
-background-image:
-linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-background-size:50px 50px;
-z-index:-1;
-}
-
-/* LOADER */
-
-#loader{
-position:fixed;
-width:100%;
-height:100vh;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.spinner{
-width:70px;
-height:70px;
-border:7px solid rgba(255,255,255,0.1);
-border-top:7px solid white;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-/* NAVBAR */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-padding:20px 7%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(15px);
-border-bottom:1px solid rgba(255,255,255,0.08);
-z-index:1000;
-}
-
-.logo{
-font-size:34px;
-font-weight:800;
-color:white;
-letter-spacing:2px;
-}
-
-nav ul{
-display:flex;
-list-style:none;
-gap:35px;
-}
-
-nav ul li a{
-text-decoration:none;
-color:#d1d1d1;
-font-size:16px;
-transition:0.4s;
-}
-
-nav ul li a:hover{
-color:white;
-}
-
-/* HERO */
-
-#home{
-min-height:100vh;
-display:flex;
-align-items:center;
-padding:120px 7%;
-}
-
-.hero{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-gap:60px;
-align-items:center;
-width:100%;
-}
-
-.hero-text h1{
-font-size:75px;
-line-height:1.1;
-font-weight:800;
-margin-bottom:25px;
-}
-
-.hero-text span{
-color:#ffffff;
-text-shadow:0 0 20px rgba(255,255,255,0.4);
-}
-
-.hero-text p{
-font-size:19px;
-line-height:1.9;
-color:#b5b5b5;
-max-width:600px;
-}
-
-.hero-buttons{
-display:flex;
-gap:20px;
-margin-top:40px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:16px 35px;
-border:none;
-border-radius:60px;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
-transition:0.4s;
-}
-
-.primary-btn{
-background:white;
-color:black;
-}
-
-.primary-btn:hover{
-transform:translateY(-5px);
-box-shadow:0 0 30px rgba(255,255,255,0.3);
-}
-
-.secondary-btn{
-background:transparent;
-border:1px solid rgba(255,255,255,0.3);
-color:white;
-}
-
-.secondary-btn:hover{
-background:white;
-color:black;
-}
-
-.hero-image img{
-width:100%;
-border-radius:35px;
-animation:floatImage 4s ease-in-out infinite;
-object-fit:cover;
-box-shadow:0 0 50px rgba(255,255,255,0.08);
-}
-
-@keyframes floatImage{
-0%{
-transform:translateY(0px);
-}
-50%{
-transform:translateY(-18px);
-}
-100%{
-transform:translateY(0px);
-}
-}
-
-/* SECTION */
-
-section{
-padding:100px 7%;
-}
-
-.section-title{
-text-align:center;
-margin-bottom:70px;
-}
-
-.section-title h2{
-font-size:55px;
-margin-bottom:15px;
-}
-
-.section-title p{
-font-size:18px;
-color:#a1a1a1;
-}
-
-/* MENU */
-
-.menu-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:35px;
-}
-
-.menu-card{
-position:relative;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:35px;
-overflow:hidden;
-transition:0.5s;
-backdrop-filter:blur(15px);
-}
-
-.menu-card:hover{
-transform:translateY(-10px);
-border-color:rgba(255,255,255,0.2);
-box-shadow:0 0 40px rgba(255,255,255,0.08);
-}
-
-.menu-card img{
-width:100%;
-height:260px;
-object-fit:cover;
-transition:0.5s;
-}
-
-.menu-card:hover img{
-transform:scale(1.05);
-}
-
-.menu-content{
-padding:30px;
-}
-
-.menu-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-margin-bottom:20px;
-}
-
-.menu-header h3{
-font-size:36px;
-font-weight:700;
-}
-
-.rating{
-min-width:90px;
-height:50px;
-display:flex;
-justify-content:center;
-align-items:center;
-background:white;
-color:black;
-border-radius:50px;
-font-size:18px;
-font-weight:700;
-padding:0 20px;
-}
-
-.menu-content p{
-font-size:18px;
-line-height:1.8;
-color:#b5b5b5;
-margin-bottom:35px;
-}
-
-.menu-footer{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.price{
-font-size:48px;
-font-weight:800;
-}
-
-.status{
-padding:14px 22px;
-background:rgba(255,255,255,0.06);
-border-radius:50px;
-font-size:15px;
-color:#e5e5e5;
-}
-
-/* CONTACT */
-
-.contact-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-gap:35px;
-}
-
-.contact-box{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:35px;
-padding:35px;
-transition:0.5s;
-}
-
-.contact-box:hover{
-transform:translateY(-10px);
-box-shadow:0 0 40px rgba(255,255,255,0.08);
-}
-
-.contact-box h2{
-font-size:45px;
-margin-bottom:20px;
-}
-
-.contact-box p{
-line-height: 40px;
-color:#b5b5b5;
-margin-bottom:35px;
-}
-
-.contact-item{
-display:flex;
-align-items:center;
-gap:18px;
-margin-bottom:20px;
-padding:18px;
-background:rgba(255,255,255,0.03);
-border-radius:20px;
-text-decoration:none;
-color:white;
-transition:0.4s;
-}
-
-.contact-item:hover{
-background:white;
-color:black;
-transform:translateX(8px);
-}
-
-.contact-icon{
-width:60px;
-height:60px;
-border-radius:18px;
-display:flex;
-justify-content:center;
-align-items:center;
-background:rgba(255,255,255,0.08);
-font-size:24px;
-}
-
-.social-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-margin-top:20px;
-}
-
-.social-box{
-padding:20px;
-height:140px;
-border-radius:25px;
-background:rgba(255,255,255,0.03);
-text-align:center;
-text-decoration:none;
-color:white;
-transition:0.4s;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
-
-.social-box:hover{
-background:white;
-color:black;
-transform:translateY(-8px);
-}
-
-.social-icon{
-font-size:35px;
-margin-bottom:15px;
-}
-
-/* FOOTER */
-
-footer{
-padding:30px;
-text-align:center;
-background:#050505;
-color:#9d9d9d;
-border-top:1px solid rgba(255,255,255,0.08);
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.hero-text h1{
-font-size:50px;
-}
-
-.menu-header{
-flex-direction:column;
-align-items:flex-start;
-}
-
-nav{
-flex-direction:column;
-gap:20px;
-}
-
-.social-grid{
-grid-template-columns:1fr;
-}
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>10.9 Restobar & Catering | Premium Buffet & Events | San Carlos City</title>
+  <meta name="description" content="Experience exceptional Filipino fusion cuisine at 10.9 Restobar. Buffet restaurant, full catering services, private dining, and signature cocktails in San Carlos City, Negros Occidental. Rated 4.2★ on Google.">
+  <meta name="theme-color" content="#0a0806">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0c0a08;
+      color: #ece6df;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1b17;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bd9a4b;
+      border-radius: 10px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(12, 10, 8, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(189, 154, 75, 0.25);
+      transition: all 0.3s ease;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f3e7c5, #c9a455);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .logo span {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #c9a87c;
+      display: block;
+      line-height: 1.2;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #e2d9cf;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.25s;
+      letter-spacing: 0.3px;
+    }
+    .nav-links a:hover {
+      color: #e2b153;
+    }
+    .reserve-btn {
+      background: rgba(189, 154, 75, 0.15);
+      border: 1px solid #bd9a4b;
+      padding: 0.5rem 1.3rem !important;
+      border-radius: 40px;
+      transition: 0.2s;
+    }
+    .reserve-btn:hover {
+      background: #bd9a4b;
+      color: #0c0a08 !important;
+    }
+    .mobile-menu {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #e2b153;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: #bd9a4b;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      color: #0c0a08;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-primary:hover {
+      background: #dbb25c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(189, 154, 75, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #bd9a4b;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      color: #bd9a4b;
+      font-weight: 600;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: rgba(189, 154, 75, 0.1);
+      border-color: #e2b153;
+      color: #e2b153;
+    }
+
+    /* HERO with BIG BACKGROUND IMAGE OVERLAY */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+      /* Background image from Google Maps - high quality restobar image */
+      background-image: url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAGFcqHo0BJGr0Td-lquBLOY8eLENjcb1q8i1CrwvkRrBI5DS4hxmZeZuHz3WFWUIn_RdiOcpTgQZEL7LqqU1Xmq6L-WL2A-09CXwH7kCGmxx8UmbG4i7wlOr94OWNa6g8zjGtG1NrLa_PU=s1360-w1360-h1020-rw');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+    }
+    /* Strong dark overlay for readability - makes text pop */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.68);
+      /* darker overlay for better contrast */
+      z-index: 1;
+    }
+    /* gradient overlay for smooth blend */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background: linear-gradient(to top, #0c0a08, transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(189, 154, 75, 0.25);
+      backdrop-filter: blur(8px);
+      padding: 0.4rem 1.3rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #f3deaa;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(189, 154, 75, 0.5);
+    }
+    .hero-content h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .hero-highlight {
+      color: #e9bc6e;
+    }
+    .rating-badge {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin: 1.8rem 0;
+    }
+    .stars {
+      color: #f5b042;
+      letter-spacing: 3px;
+      font-size: 1rem;
+    }
+    .price-tag {
+      background: #1f1c18cc;
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .info-list {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .info-list i {
+      width: 28px;
+      color: #e9bc6e;
+    }
+    .hero-img-card {
+      background: rgba(20, 18, 15, 0.5);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 2rem;
+      border: 1px solid rgba(189,154,75,0.4);
+      box-shadow: 0 25px 40px -10px black;
+      text-align: center;
+    }
+    .hero-img-card i {
+      font-size: 3.5rem;
+      margin: 0 0.5rem;
+      color: #e9bc6e;
+    }
+    .featured-dish {
+      margin-top: 1.5rem;
+      font-style: italic;
+      border-top: 1px dashed rgba(189,154,75,0.5);
+      padding-top: 1rem;
+    }
+
+    /* Sections */
+    .section {
+      padding: 6rem 0;
+    }
+    .section-dark {
+      background: #0e0c09;
+    }
+    .section-title {
+      font-size: 2.6rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 3px;
+      background: #bd9a4b;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: #16130f;
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: 0.2s;
+      border: 1px solid #26211c;
+    }
+    .feature-card i {
+      font-size: 2.5rem;
+      color: #bd9a4b;
+      margin-bottom: 1rem;
+    }
+
+    .reviews-slider {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+    }
+    .review-item {
+      min-width: 320px;
+      background: #16130f;
+      border-radius: 28px;
+      padding: 1.8rem;
+      border-left: 4px solid #e0b055;
+    }
+
+    .menu-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .menu-dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2e2822;
+      padding: 1rem 0;
+    }
+    .price-banner {
+      background: linear-gradient(95deg, #1e1914, #120f0c);
+      border-radius: 60px;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .location-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: #11100d;
+      border-radius: 32px;
+      padding: 2rem;
+    }
+    .hours-card {
+      background: #1d1915;
+      padding: 1.5rem;
+      border-radius: 24px;
+    }
+    .catering-block {
+      background: linear-gradient(125deg, #171411, #0d0b09);
+      border-radius: 40px;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid #bd9a4b30;
+    }
+    footer {
+      background: #080706;
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid #25201b;
+    }
+    .gold-link {
+      color: #e0b055;
+      text-decoration: none;
+    }
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0f0e0cee;
+        backdrop-filter: blur(16px);
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 28px;
+        gap: 1.2rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .location-panel {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 0 1.5rem;
+      }
+      .hero {
+        background-position: center 20%;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="loader">
-<div class="spinner"></div>
-</div>
-
-<!-- NAVBAR -->
-
-<nav>
-
-<div class="logo">
-10.9 RESTOBAR
-</div>
-
-<ul>
-<li><a href="#home">Home</a></li>
-<li><a href="#menu">Menu</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-
+<nav class="navbar">
+  <div class="nav-flex">
+    <div class="logo">
+      <h1>10.9</h1>
+      <span>RESTOBAR & CATERING</span>
+    </div>
+    <div class="mobile-menu" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Experience</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#catering">Catering</a></li>
+      <li><a href="#" class="reserve-btn" id="callBtn"><i class="fas fa-phone-alt"></i> Call</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HOME -->
-
-<section id="home">
-
-<div class="hero">
-
-<div class="hero-text">
-
-<h1>
-Taste The Best <span>Delicious Food</span>
-</h1>
-
-<p>
-Enjoy premium meals and unforgettable dining experience only at 10.9 Restobar & Catering Services.
-</p>
-
-<div class="hero-buttons">
-
-<a href="#menu">
-<button class="btn primary-btn">
-Explore Menu
-</button>
-</a>
-
-<a href="#contact">
-<button class="btn secondary-btn">
-Contact Us
-</button>
-</a>
-
-</div>
-
-</div>
-
-<div class="hero-image">
-
-<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- MENU -->
-
-<section id="menu">
-
-<div class="section-title">
-<h2>Popular Menu</h2>
-<p>Premium meals with modern black and white design</p>
-</div>
-
-<div class="menu-grid">
-
-<!-- MENU 1 -->
-
-<div class="menu-card">
-<img src="https://69ff0ee2e3ddafb3f49f81ee.imgix.net/haliyas-adobo_2021-12-08_23-01-40_gallery.jpg?w=800&h=533&ar=800%3A533">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Chicken Adobo</h3>
-<div class="rating">9.8/10</div>
-</div>
-
-<p>
-Experience authentic Filipino taste with our flavorful Chicken Adobo recipe
-</p>
-
-<div class="menu-footer">
-<div class="price">₱249</div>
-<div class="status">Best Seller</div>
-</div>
-
-</div>
-</div>
-
-<!-- MENU 2 -->
-
-<div class="menu-card">
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Burger</h3>
-<div class="rating">9.6/10</div>
-</div>
-
-<p>
-Juicy beef burger with melted cheese and signature sauce.
-</p>
-
-<div class="menu-footer">
-<div class="price">₱189</div>
-<div class="status">Hot Deal</div>
-</div>
-
-</div>
-</div>
-
-<!-- MENU 3 -->
-
-<div class="menu-card">
-<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Cheesecake</h3>
-<div class="rating">9.5/10</div>
-</div>
-
-<p>
-Soft creamy cheesecake with sweet chocolate drizzle.
-</p>
-
-<div class="menu-footer">
-<div class="price">₱129</div>
-<div class="status">Sweet</div>
-</div>
-
-</div>
-</div>
-
-<!-- MENU 4 -->
-
-<div class="menu-card">
-<img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200&auto=format&fit=crop">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Chicken</h3>
-<div class="rating">9.7/10</div>
-</div>
-
-<p>
-Crispy fried chicken with flavorful spices and crunchy skin.
-</p>
-
-<div class="menu-footer">
-<div class="price">₱199</div>
-<div class="status">Crunchy</div>
-</div>
-
-</div>
-</div>
-
-<!-- MENU 5 -->
-
-<div class="menu-card">
-<img src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?q=80&w=1200&auto=format&fit=crop">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Spaghetti</h3>
-<div class="rating">9.4/10</div>
-</div>
-
-<p>
-Creamy spaghetti topped with rich meat sauce and cheese.
-</p>
-
-<div class="menu-footer">
-<div class="price">₱179</div>
-<div class="status">Popular</div>
-</div>
-
-</div>
-</div>
-
-<!-- MENU 6 -->
-
-<div class="menu-card">
-<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=1200&auto=format&fit=crop">
-
-<div class="menu-content">
-
-<div class="menu-header">
-<h3>Milk Tea</h3>
-<div class="rating">9.9/10</div>
-</div>
-
-<p>
-Refreshing milk tea with pearls and creamy sweetness.
-</p>
-
-<div class="menu-footer">
-<div class="price">₱99</div>
-<div class="status">Refreshing</div>
-</div>
-
-</div>
-</div>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-<div class="section-title">
-<h2>Contact Us</h2>
-<p>Connect with  Restaurant anytime</p>
-</div>
-
-<div class="contact-container">
-
-<div class="contact-box">
-
-<h2>Visit Us</h2>
-
-<p>
-Experience premium food and unforgettable dining moments everyday.
-</p>
-
-<a href="https://www.google.com/maps/place/10.9+Restobar+%26+Catering+Services/@10.4866825,123.4121127,17z/data=!3m1!4b1!4m6!3m5!1s0x33a93e40e623b7cf:0xca1096969124eb7a!8m2!3d10.4866825!4d123.4143225!16s%2Fg%2F11bc7thcrc?authuser=1&entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-item">
-
-<div class="contact-icon">📍</div>
-
-<div>
-<h3>Location</h3>
-<p>Azucena St, San Carlos City, Negros Occidental</p>
-</div>
-
-</a>
-
-<a href="mailto:aradotracy@gmail.com" class="contact-item">
-
-<div class="contact-icon">✉</div>
-
-<div>
-<h3>Email Us</h3>
-<p>123@gmail.com</p>
-</div>
-
-</a>
-
-<a class="contact-item">
-
-<div class="contact-icon">📞</div>
-
-<div>
-<h3>Call Us</h3>
-<p>(034) 312 6852</p>
-</div>
-
-</a>
-
-</div>
-
-<div class="contact-box">
-
-<h2>Follow Us</h2>
-
-<div class="social-grid">
-
-<a href="https://www.facebook.com/10.9restobar" class="social-box">
-<div class="social-icon">f</div>
-<h3>Facebook</h3>
-</a>
-
-<a href="https://www.facebook.com/10.9restobar" class="social-box">
-<div class="social-icon">◎</div>
-<h3>Instagram</h3>
-</a>
-
-<a href="#" class="social-box">
-<div class="social-icon">♪</div>
-<h3>TikTok</h3>
-</a>
-
-<a href="#" class="social-box">
-<div class="social-icon">▶</div>
-<h3>YouTube</h3>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<footer>
-© 2026 THIS WEB SITE UNDER MAINTENANCE | Premium Food Experience
-</footer>
+<main>
+  <!-- Hero Section with BIG background image overlay -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-award"></i> Award-winning Buffet · Since 2016</div>
+        <h1>Where bold flavors <span class="hero-highlight">& warm hospitality</span> meet</h1>
+        <div class="rating-badge">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> <strong style="color:white;">4.2</strong> (4,180+ reviews)</div>
+          <div class="price-tag"><i class="fas fa-tag"></i> ₱200–400 / person</div>
+          <div><i class="fas fa-utensils"></i> Buffet & a la carte</div>
+        </div>
+        <div class="info-list">
+          <div><i class="fas fa-map-pin"></i> Azucena St, San Carlos City, Negros Occidental</div>
+          <div><i class="far fa-clock"></i> Open daily 9:00 AM – late · <span id="liveStatusIndicator" style="color:#e9bc6e;">checking</span></div>
+          <div><i class="fas fa-cocktail"></i> Signature cocktails · Private dining · Live music (Fridays)</div>
+          <div><i class="fas fa-walking"></i> 10 min from city center · Free parking</div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+          <button class="btn-primary" id="directionBtn"><i class="fas fa-location-dot"></i> Get Directions</button>
+          <button class="btn-outline" id="bookTableBtn"><i class="fas fa-calendar-alt"></i> Reserve a Table</button>
+        </div>
+      </div>
+      <div class="hero-img-card">
+        <i class="fas fa-utensil-spoon"></i>
+        <i class="fas fa-martini-glass-citrus"></i>
+        <i class="fas fa-plate-wheat"></i>
+        <div class="featured-dish">
+          <i class="fas fa-quote-left"></i> "Buttered chicken, sizzling marlin & sinigang — unforgettable taste"
+          <div style="margin-top: 12px; font-size: 0.8rem;">— DM L & Atty. Jorge C. Biñas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features / Why us -->
+  <section id="about" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Crafted for experience</h2>
+      <div class="features-grid">
+        <div class="feature-card"><i class="fas fa-champagne-glasses"></i><h3>Great Cocktails</h3><p>Handcrafted mixes & premium bar</p></div>
+        <div class="feature-card"><i class="fas fa-users"></i><h3>Private Dining</h3><p>Presidential long table · Group feasts</p></div>
+        <div class="feature-card"><i class="fas fa-bell-concierge"></i><h3>Full Catering</h3><p>Weddings, birthdays, corporate</p></div>
+        <div class="feature-card"><i class="fas fa-microphone-alt"></i><h3>Live Vocals</h3><p>Romantic acoustic every Friday night</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews section -->
+  <section id="reviews" class="section">
+    <div class="container">
+      <h2 class="section-title">What our guests say</h2>
+      <div class="reviews-slider" id="reviewsContainer"></div>
+      <div style="margin-top: 2rem; text-align: right;">
+        <a href="#" class="gold-link" id="googleReviewsLink"><i class="fab fa-google"></i> See all 4,180+ reviews on Google →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu preview section -->
+  <section id="menu" class="section section-dark">
+    <div class="container">
+      <div class="price-banner">
+        <span><i class="fas fa-wallet"></i> Price range per person: <strong>₱200 – ₱400</strong> (reported by guests)</span>
+        <span><i class="fas fa-hourglass-half"></i> Average wait: 15-20 min · Worth it!</span>
+        <span><i class="fas fa-clock"></i> Peak: 7PM · No long queues</span>
+      </div>
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">Signature favorites</h2>
+      <div class="menu-showcase">
+        <div class="menu-dish"><span><i class="fas fa-drumstick-bite"></i> Buttered Chicken</span><span class="stars" style="color:#e0b055;">⭐⭐⭐⭐⭐</span></div>
+        <div class="menu-dish"><span><i class="fas fa-fish"></i> Sizzling Marlin</span><span>Grilled perfection</span></div>
+        <div class="menu-dish"><span><i class="fas fa-shrimp"></i> Gambas Al Ajillo</span><span>Garlicky & rich</span></div>
+        <div class="menu-dish"><span><i class="fas fa-pork"></i> Sinigang na Baboy</span><span>Classic sour broth</span></div>
+        <div class="menu-dish"><span><i class="fas fa-leaf"></i> Chop Suey</span><span>Fresh vegetables</span></div>
+        <div class="menu-dish"><span><i class="fas fa-egg-noodles"></i> Sotanghon Guisado</span><span>"Soooo much love"</span></div>
+        <div class="menu-dish"><span><i class="fas fa-fire"></i> Grilled Blue Marlin</span><span>Best with rice</span></div>
+        <div class="menu-dish"><span><i class="fas fa-cocktail"></i> Signature Mojito</span><span>Refreshing twist</span></div>
+      </div>
+      <div style="margin-top: 2rem; background: #1b1713; border-radius: 28px; padding: 1rem 1.8rem;">
+        <i class="fas fa-heart" style="color:#e0b055;"></i> <strong>Guest favorites:</strong> Adobo fusion, crispy pata, grilled tanguige. Cozy ambiance after renovation.
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & hours -->
+  <section id="location" class="section">
+    <div class="container">
+      <div class="location-panel">
+        <div>
+          <h3><i class="fas fa-store"></i> Visit us</h3>
+          <p style="margin: 1rem 0;"><strong>10.9 Restobar & Catering Services</strong><br>Azucena St, San Carlos City, Negros Occidental<br><i class="fas fa-phone-alt"></i> (034) 312 6852</p>
+          <p><i class="fab fa-facebook"></i> Facebook: 10.9 Restobar & Catering<br><i class="fas fa-clock"></i> Open hours: Mon–Sun 9:00 AM – 11:00 PM (kitchen till 10PM)</p>
+          <button class="btn-outline" style="margin-top: 1rem;" id="mapsBtn"><i class="fas fa-map-marked-alt"></i> Open Google Maps</button>
+        </div>
+        <div class="hours-card">
+          <h3><i class="far fa-calendar-check"></i> Opening details</h3>
+          <p><strong>Today's hours:</strong> <span id="liveHoursText">9:00 AM – 11:00 PM</span></p>
+          <p><i class="fas fa-utensils"></i> People typically spend 30min to 4 hours here.<br><i class="fas fa-parking"></i> Parking space available, wheelchair accessible.</p>
+          <p><i class="fas fa-credit-card"></i> <strong>Payment:</strong> Cash-only · ATM nearby</p>
+          <p><i class="fas fa-champagne-glasses"></i> Private dining room for special occasions.</p>
+          <div style="margin-top: 1rem;"><i class="fas fa-car"></i> Estimated 10 min drive from city center</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catering Services CTA -->
+  <section id="catering" class="section">
+    <div class="container">
+      <div class="catering-block">
+        <i class="fas fa-rings-wedding" style="font-size: 2.8rem; color:#e0b055;"></i>
+        <h2 style="font-family: 'Playfair Display'; margin: 0.8rem 0;">Elevate your event with 10.9 Catering</h2>
+        <p style="max-width: 700px; margin: 0 auto 1.4rem;">Buffet setup, customized Filipino fusion menus, and professional service that makes every occasion unforgettable. From intimate parties to grand celebrations.</p>
+        <button class="btn-primary" id="cateringInqBtn"><i class="fas fa-envelope"></i> Request a catering quote</button>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">Off-site catering available · 10+ years experience</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 10.9 Restobar & Catering Services — Azucena St, San Carlos City, Negros Occidental</p>
+      <p style="margin-top: 0.6rem;"><i class="fab fa-facebook"></i> /10.9restobar  |  <i class="fab fa-instagram"></i> @10.9restobar  |  <i class="fas fa-mobile-alt"></i> (034) 312 6852</p>
+      <p style="font-size: 0.7rem; opacity: 0.7;">📍 Located in Dexter's Pizza San Carlos City vicinity · Great for lunch, dinner & events</p>
+    </div>
+  </footer>
+</main>
 
 <script>
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById('mobileMenuToggle');
+  const navMenu = document.getElementById('navMenu');
+  mobileToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
 
-window.addEventListener("load",()=>{
+  // Live status indicator
+  function updateLiveStatus() {
+    const now = new Date();
+    const hour = now.getHours();
+    const isOpen = hour >= 9 && hour < 23;
+    const statusSpan = document.getElementById('liveStatusIndicator');
+    const hoursSpan = document.getElementById('liveHoursText');
+    if (statusSpan) {
+      statusSpan.innerHTML = isOpen ? '🟢 Open now until 11PM' : '🔴 Closed · Opens at 9 AM';
+    }
+    if (hoursSpan) hoursSpan.innerHTML = isOpen ? 'Open now until 11:00 PM' : 'Closed · Opens 9:00 AM';
+  }
+  updateLiveStatus();
 
-document.getElementById("loader").style.display="none";
+  const reviewsData = [
+    { name: "DM L", stars: 5, text: "Loooovvveee the buttered chicken! Wait time 15-20min but totally worth it!", time: "3 years ago" },
+    { name: "Kearl", stars: 5, text: "Recently renovated. Good food at reasonable prices. Great venue for special occasions.", time: "9 months ago" },
+    { name: "Alexie The Media Guy", stars: 5, text: "Amazing for events & dine in. Food pleasing to the taste buds. Love!", time: "5 years ago" },
+    { name: "Atty. Jorge C. Biñas", stars: 5, text: "Great ambiance and pinoy-style resto. Grilled tanguige, shrimp gambas, sinigang baboy excellent.", time: "4 years ago" },
+    { name: "Mar Apuhin", stars: 4, text: "Affordable, ideal for Filipino fusion. Cozy dinner with occasional vocal singer.", time: "8 years ago" },
+    { name: "Ryan Purca", stars: 5, text: "Great singer on Fridays, perfect for dinner date. Great ambiance.", time: "6 years ago" }
+  ];
 
-});
+  function renderReviews() {
+    const container = document.getElementById('reviewsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    reviewsData.forEach(rev => {
+      let starHtml = '';
+      for (let i = 0; i < Math.floor(rev.stars); i++) starHtml += '<i class="fas fa-star"></i>';
+      if (rev.stars % 1 !== 0) starHtml += '<i class="fas fa-star-half-alt"></i>';
+      const card = document.createElement('div');
+      card.className = 'review-item';
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between;"><strong>${rev.name}</strong> <span style="color:#f5b042;">${starHtml}</span></div>
+        <p style="margin: 10px 0 8px; font-size:0.9rem;">“${rev.text}”</p>
+        <div style="font-size:0.7rem; opacity:0.7;">${rev.time}</div>
+      `;
+      container.appendChild(card);
+    });
+  }
+  renderReviews();
 
+  document.getElementById('directionBtn')?.addEventListener('click', () => {
+    window.open('https://maps.google.com/?q=Azucena+St+San+Carlos+City+Negros+Occidental', '_blank');
+  });
+  document.getElementById('mapsBtn')?.addEventListener('click', () => {
+    window.open('https://maps.google.com/?q=10.9+Restobar+Azucena+St+San+Carlos', '_blank');
+  });
+  document.getElementById('bookTableBtn')?.addEventListener('click', () => {
+    alert("📞 Call (034) 312 6852 to reserve your table. Walk-ins welcome!");
+  });
+  document.getElementById('cateringInqBtn')?.addEventListener('click', () => {
+    alert("✉️ Send inquiry: catering@10.9restobar.com or call (034) 312 6852. Our team will respond within 2 hours.");
+  });
+  document.getElementById('googleReviewsLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open('https://search.google.com/local/reviews?placeid=ChIJN5bKx4---jMRUhhM5hE2Y8I', '_blank');
+  });
+  document.getElementById('callBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'tel:(034)3126852';
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href !== "#" && href !== "#home" && href !== "#about" && href !== "#reviews" && href !== "#menu" && href !== "#location" && href !== "#catering") return;
+      if (href && href !== "#") {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (navMenu.classList.contains('show')) navMenu.classList.remove('show');
+        } else if (targetId === "home") {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  const reservePhone = document.querySelector('.reserve-btn');
+  if(reservePhone) reservePhone.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'tel:(034)3126852';
+  });
 </script>
-
 </body>
 </html>
